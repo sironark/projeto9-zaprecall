@@ -1,12 +1,42 @@
-//import { useState } from 'react'
-//import viteLogo from '/vite.svg'
+
 
 import styled from "styled-components"
 import logo from "./assets/logo.png"
 import play from "./assets/seta_play.png"
+import virar from "./assets/seta_virar.png"
+import cards from "./Cards"
+import { useState } from "react"
+
+
+
+
+
 
 function App() {
- 
+
+
+  const [cardsRender, setCardsRender] = useState([...cards]);
+  const [clickCard, setClickCard] = useState();
+  const[perguntaCard, setPerguntaCard] = useState("");
+  const [iconeEtapa, setIconeEtapa] = useState(play);
+  //const [etapaFlashs, setEtapaFlashs] = useState(0);
+      
+  function playFlash(carta, indice) {
+       
+        for(let i=0; i<cards.length; i++){
+          if(i === indice){
+            let pergunta = cards[i].question;
+            setPerguntaCard(pergunta)
+            
+          }
+       }
+       
+        
+
+    }
+
+
+
 
   return (
     <>
@@ -17,12 +47,26 @@ function App() {
         </SCheader>
         
 
-        <SCdeck>
-          <li>
-            <p>Pergunta 1</p>
-            <img src={play} alt="play"/>
+        <SCdeck 
+        clickCard={clickCard}
+        cards={cards}
+        
+        >
+
+          {cardsRender.map((carta, indice)=>
+          
+          <li key={indice}>
+
+            <p>{perguntaCard === cards[indice].question ? perguntaCard:` Pergunta ${indice + 1}`} </p>
+
+            <img 
+            src={play} alt="play"  
+            onClick={()=> playFlash(carta, indice)}  
+            />
+
           </li>
-         
+          )}
+
         </SCdeck>
         <SCfooter>
           <p>0/4 CONCLUÍDOS</p>
@@ -65,13 +109,16 @@ const SCfooter = styled.div`
 const SCdeck = styled.ul`
  display: flex;
  flex-direction: column;
- 
+ overflow-y: scroll;
+ margin-bottom: 50px;
 
   li{
+    
     width: 300px;
     height: 4.1rem;
     
     display: flex;
+    
     justify-content: space-between;
     align-items: center;
     padding: 20px;
@@ -83,15 +130,21 @@ const SCdeck = styled.ul`
     border-radius: 5px;
 
 
+
     img{
       width: 20px;
       height: 23px;
+      :hover{
+        cursor: pointer;
+      }
     }
     p{
       font-family: 'Recursive';
       font-style: normal;
       font-weight: 700;
-      font-size: 16px;    }
+      font-size: 16px;    
+     // 
+    }
   }
     `;
 
