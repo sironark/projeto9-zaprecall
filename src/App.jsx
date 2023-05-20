@@ -45,7 +45,7 @@ const resultado = r =>{
       </SCcontainerJogo>
 
       <SCfooter >
-          <p>{contagemFlash}/8 CONCLUÍDOS</p>
+          <p data-test="footer" >{contagemFlash}/8 CONCLUÍDOS</p>
       </SCfooter>
 
 </SCMainCOntainer>

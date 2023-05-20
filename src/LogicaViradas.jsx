@@ -66,7 +66,9 @@ export default function LogicaViradas(props) {
       
     }
 
+
     
+      
   return(
       <>
       <SCdeck estado = {estado}
@@ -74,32 +76,32 @@ export default function LogicaViradas(props) {
               colorFlash = {colorFlash}
               textLineFlash = {textLineFlash}
               icone = {icone}
-              
+              data-test="flashcard"
               >
         
           { estado === "inicial" &&(
               <li >
-                      <p>{perguntaCard === cards[props.indiceFlash].question ? perguntaCard:` Pergunta ${props.indiceFlash +1}`} </p>
+                      <p data-test="flashcard-text" >{perguntaCard === cards[props.indiceFlash].question ? perguntaCard:` Pergunta ${props.indiceFlash +1}`} </p>
                       <img 
                       src={perguntaCard === cards[props.indiceFlash].question ? virar : play} alt="play"  
-                      onClick={()=>inicial()}  
+                      onClick={()=>inicial()}  data-test="play-btn"
                       />
 
                       <img 
-                      src={statusIcone} alt="status"  
+                      src={statusIcone} alt="status" 
                       />
                     </li>)}
           
            {estado === "pergunta" &&(
               <li >
-                      <p>{showAnsware === false ? cards[props.indiceFlash].question : ""} </p>
-                      <p>{showAnsware === true ? cards[props.indiceFlash].answer : ""}</p>
+                      <p data-test="flashcard-text">{showAnsware === false ? cards[props.indiceFlash].question : ""} </p>
+                      <p data-test="flashcard-text">{showAnsware === true ? cards[props.indiceFlash].answer : ""}</p>
                       <span>
-                        <div onClick={()=> nLembrei()}>Não lembrei</div>
-                        <div onClick={()=>QLembrei()}>Quase não lembrei</div>
-                        <div onClick={()=> zap()}>Zap!</div>
+                        <div data-test="no-btn"  onClick={()=> nLembrei()}>Não lembrei</div>
+                        <div data-test="partial-btn" onClick={()=>QLembrei()}>Quase não lembrei</div>
+                        <div data-test="zap-btn" onClick={()=> zap()}>Zap!</div>
                       </span>
-                      <img 
+                      <img  data-test="turn-btn"
                       src= {virar} alt="virar"  
                       onClick={()=>resposta()}  
                       />
