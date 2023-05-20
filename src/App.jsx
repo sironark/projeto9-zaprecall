@@ -2,8 +2,7 @@
 
 import styled from "styled-components"
 import logo from "./assets/logo.png"
-import play from "./assets/seta_play.png"
-import virar from "./assets/seta_virar.png"
+import LogicaViradas from "./LogicaViradas"
 import cards from "./Cards"
 import { useState } from "react"
 
@@ -12,78 +11,55 @@ import { useState } from "react"
 
 
 
-function App() {
 
+export default  function App() {
+  const cardsRender = [...cards]
+  const [contagemFlash, setContagemFlash] = useState(0)
 
-  const [cardsRender, setCardsRender] = useState([...cards]);
-  const [clickCard, setClickCard] = useState();
-  const[perguntaCard, setPerguntaCard] = useState("");
-  const [iconeEtapa, setIconeEtapa] = useState(play);
-  //const [etapaFlashs, setEtapaFlashs] = useState(0);
-      
-  function playFlash(carta, indice) {
-       
-        for(let i=0; i<cards.length; i++){
-          if(i === indice){
-            let pergunta = cards[i].question;
-            setPerguntaCard(pergunta)
-            
-          }
-       }
-       
-        
-
-    }
-
-
-
+const resultado = r =>{
+  
+  setContagemFlash(r)
+  
+}
 
   return (
     <>
+<SCMainCOntainer>
+
       <SCcontainerJogo>
+
         <SCheader>
          <img src={logo} alt="logo"/>
          <p>ZapRecall</p>
         </SCheader>
-        
 
-        <SCdeck 
-        clickCard={clickCard}
-        cards={cards}
-        
-        >
-
-          {cardsRender.map((carta, indice)=>
-          
-          <li key={indice}>
-
-            <p>{perguntaCard === cards[indice].question ? perguntaCard:` Pergunta ${indice + 1}`} </p>
-
-            <img 
-            src={play} alt="play"  
-            onClick={()=> playFlash(carta, indice)}  
-            />
-
-          </li>
-          )}
-
-        </SCdeck>
-        <SCfooter>
-          <p>0/4 CONCLUÍDOS</p>
-      </SCfooter>
+          {cardsRender.map((flash, indiceFlash) =>
+          <div key={indiceFlash}>
+            <LogicaViradas  
+                            flash = {flash}
+                            indiceFlash = {indiceFlash}
+                            resultadoContagem = {resultado}/>
+          </div>
+        )}
 
       </SCcontainerJogo>
 
+      <SCfooter >
+          <p>{contagemFlash}/8 CONCLUÍDOS</p>
+      </SCfooter>
+
+</SCMainCOntainer>
     </>
   )
 }
-
-export default App
 
 
 ////////////////Styled components///////////////
 
 
+const SCMainCOntainer = styled.div`
+  position: relative;
+`;
 
 const SCfooter = styled.div`
   position: absolute;
@@ -106,47 +82,6 @@ const SCfooter = styled.div`
   };
 `;
 
-const SCdeck = styled.ul`
- display: flex;
- flex-direction: column;
- overflow-y: scroll;
- margin-bottom: 50px;
-
-  li{
-    
-    width: 300px;
-    height: 4.1rem;
-    
-    display: flex;
-    
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-bottom: 25px;
-
-    background: #FFFFFF;
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-
-
-
-    img{
-      width: 20px;
-      height: 23px;
-      :hover{
-        cursor: pointer;
-      }
-    }
-    p{
-      font-family: 'Recursive';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 16px;    
-     // 
-    }
-  }
-    `;
 
 const SCheader = styled.div`
   width: 100%;
@@ -170,6 +105,8 @@ const SCcontainerJogo = styled.div`
   width: 23.4375rem;
   height: 41.6875rem;
   background-color: #FB6B6B;
+  overflow: scroll;
+  overflow-x: none ;
 
   display: flex;
   flex-direction: column;
