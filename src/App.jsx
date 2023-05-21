@@ -16,9 +16,9 @@ export default  function App() {
   const cardsRender = [...cards]
   const [contagemFlash, setContagemFlash] = useState(0)
 
-const resultado = r =>{
-  
-  setContagemFlash(r)
+const resultado = () =>{
+  const auxConter = contagemFlash + 1;
+  setContagemFlash(auxConter)
   
 }
 
@@ -107,6 +107,9 @@ const SCcontainerJogo = styled.div`
   background-color: #FB6B6B;
   overflow: scroll;
   overflow-x: none ;
+  ::-webkit-scrollbar{
+    width:0;
+  }
 
   display: flex;
   flex-direction: column;
@@ -114,6 +117,7 @@ const SCcontainerJogo = styled.div`
   padding-left: 2.3125rem;
   padding-right: 2.3125rem;
   box-sizing: border-box;
+  padding-bottom: 50px;
 
   position: relative;
 

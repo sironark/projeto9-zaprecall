@@ -20,20 +20,17 @@ export default function LogicaViradas(props) {
     const [showAnsware, setShowAnsware] = useState(false)
     const [colorFlash, setColorFlash] = useState("black")
     const [textLineFlash, setTextLineFlash] = useState("none")
-    const [contador, setContador] = useState(0)
     const [statusIcone,setStatusIcone ] = useState(erro)
     const [icone, setIcone] = useState(false)
-   
-   
-    
-
+    const [datatest, setDatatest] = useState("0")
+  
     function inicial(){
       setEstado("pergunta");
     }
 
     function resposta(){
       setShowAnsware(true)
-      setContador(1)
+      
     }
 
     function nLembrei(){
@@ -42,7 +39,8 @@ export default function LogicaViradas(props) {
       setColorFlash("#FF3030")
       setTextLineFlash("line-through")
       setStatusIcone(erro)
-     
+      props.resultadoContagem()
+      DataErro()
     }
 
 
@@ -52,8 +50,9 @@ export default function LogicaViradas(props) {
       setColorFlash("#FF922E")
       setTextLineFlash("line-through")
       setStatusIcone(quase)
-
+      props.resultadoContagem()
      
+      DataQuase()
     }
 
     function zap(){
@@ -62,13 +61,23 @@ export default function LogicaViradas(props) {
       setColorFlash("#2FBE34")
       setTextLineFlash("line-through")
       setStatusIcone(certo)
-
+      props.resultadoContagem()
       
+      DataCerto()
     }
 
+    function DataCerto(){
+      setDatatest("zap-icon")
+    }
 
-    
-      
+    function DataQuase(){
+      setDatatest("partial-icon")
+    }
+
+    function DataErro(){
+      setDatatest("no-icon")
+    }
+
   return(
       <>
       <SCdeck estado = {estado}
@@ -88,7 +97,7 @@ export default function LogicaViradas(props) {
                       />
 
                       <img 
-                      src={statusIcone} alt="status" 
+                      src={statusIcone} alt="status" data-test={datatest}
                       />
                     </li>)}
           
@@ -193,6 +202,9 @@ const SCdeck = styled.ul`
         height: 37px;
         border-radius: 5px;
         margin-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         
         color: #fff;
         font-family: 'Recursive';
@@ -200,7 +212,9 @@ const SCdeck = styled.ul`
         font-weight: 400;
         font-size: 14px;
         text-align: center;
-        
+        :hover{
+        cursor: pointer;
+      }
 
       
       :nth-child(1n){
