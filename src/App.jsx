@@ -6,12 +6,6 @@ import LogicaViradas from "./LogicaViradas"
 import cards from "./Cards"
 import { useState } from "react"
 
-
-
-
-
-
-
 export default  function App() {
   const cardsRender = [...cards]
   const [contagemFlash, setContagemFlash] = useState(0)
@@ -34,12 +28,12 @@ const resultado = () =>{
         </SCheader>
 
           {cardsRender.map((flash, indiceFlash) =>
-          <div key={indiceFlash}>
-            <LogicaViradas  
-                            flash = {flash}
-                            indiceFlash = {indiceFlash}
-                            resultadoContagem = {resultado}/>
-          </div>
+            <div key={indiceFlash}>
+              <LogicaViradas  flash = {flash}
+                              indiceFlash = {indiceFlash}
+                              resultadoContagem = {resultado}
+              />
+            </div>
         )}
 
       </SCcontainerJogo>

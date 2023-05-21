@@ -30,7 +30,6 @@ export default function LogicaViradas(props) {
 
     function resposta(){
       setShowAnsware(true)
-      
     }
 
     function nLembrei(){
@@ -95,10 +94,10 @@ export default function LogicaViradas(props) {
                       src={perguntaCard === cards[props.indiceFlash].question ? virar : play} alt="play"  
                       onClick={()=>inicial()}  data-test="play-btn"
                       />
-
                       <img 
                       src={statusIcone} alt="status" data-test={datatest}
                       />
+
                     </li>)}
           
            {estado === "pergunta" &&(
